@@ -9,7 +9,7 @@ const Header = () => {
             <div className="h-fit flex-1">
                 <Search className="rounded-full" />
             </div>
-            <h1 className="text-title-1 hidden sm:block">Unsplash_</h1>
+            {/* <h1 className="text-title-1 hidden sm:block">Unsplash_</h1> */}
         </header>
     )
 }

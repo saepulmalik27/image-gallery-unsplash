@@ -2,8 +2,9 @@ import breakpoints from '@/config/breakpoints'
 import { chunkIntoN } from '@/utils/helper'
 // import { useResponsive } from './useResponsive'
 import React from 'react'
+import { Photo } from '../types'
 
-const useMasonry = (photos: Array<string>) => {
+const useMasonry = (photos: Array<Photo>): Array<Array<Photo>> => {
     const [columns, setColumns] = React.useState(1)
 
     React.useEffect(() => {
@@ -31,7 +32,7 @@ const useMasonry = (photos: Array<string>) => {
         }
     }, [])
 
-    return chunkIntoN(photos, columns)
+    return chunkIntoN(photos, columns) as Photo[][]
 }
 
 export default useMasonry
