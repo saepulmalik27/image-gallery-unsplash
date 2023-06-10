@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 const plugin = require('tailwindcss/plugin')
+const breakpoints = require('./src/config/breakpoints')
 module.exports = {
     content: [
         './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
@@ -15,6 +16,14 @@ module.exports = {
             },
             gridTemplateColumns: {
                 one: 'minmax(0, 1fr)',
+            },
+            screens: {
+                sm: `${breakpoints.sm}px`,
+                md: `${breakpoints.md}px`,
+                lg: `${breakpoints.lg}px`,
+                xl: `${breakpoints.xl}px`,
+                '2xl': `${breakpoints.xxl}px`,
+                init: `${breakpoints.init}px`,
             },
         },
     },

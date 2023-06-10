@@ -15,21 +15,23 @@ const ContentSection = () => {
     const dataImage = useMasonry(images)
 
     return (
-        <div className="grid grid-cols-1 items-start gap-x-4 sm:grid-cols-2 lg:grid-cols-3 ">
-            {dataImage.map((item, index) => (
-                <div key={index} className="grid grid-cols-1 gap-y-4">
-                    {item.map((image, key) => (
-                        <Image
-                            src={image as string}
-                            width={400}
-                            height={400}
-                            alt={`image-${key}`}
-                            key={key}
-                        />
-                    ))}
-                </div>
-            ))}
-        </div>
+        <section className="w-full max-w-screen-init px-5 init:mx-auto init:my-0">
+            <div className="grid grid-cols-1 items-start gap-x-6 sm:grid-cols-2 lg:grid-cols-3 ">
+                {dataImage.map((item, index) => (
+                    <div key={index} className="grid grid-cols-1 gap-y-6">
+                        {item.map((image, key) => (
+                            <Image
+                                src={image as string}
+                                width={400}
+                                height={400}
+                                alt={`image-${key}`}
+                                key={key}
+                            />
+                        ))}
+                    </div>
+                ))}
+            </div>
+        </section>
     )
 }
 

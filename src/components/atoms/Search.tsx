@@ -1,8 +1,17 @@
 import React from 'react'
 import SVG from 'react-inlinesvg'
-const Search = () => {
+import { twMerge } from 'tailwind-merge'
+type SearchProps = {
+    className?: string
+}
+
+const Search: React.FC<SearchProps> = ({ className }) => {
     return (
-        <div className="flex items-center gap-1 rounded-full border border-solid bg-slate-300 px-4 py-1">
+        <div
+            className={twMerge(
+                'flex items-center gap-1 border border-solid bg-white px-4 py-1',
+                className
+            )}>
             <SVG src="/assets/icons/search.svg" />
             <input
                 placeholder="search your image"

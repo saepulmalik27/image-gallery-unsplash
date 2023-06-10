@@ -15,16 +15,18 @@ const HeroSection = () => {
                     className="h-96 w-full object-cover"
                 />
             </div>
-            <div className="relative z-10 flex h-full w-full items-center justify-center bg-white bg-opacity-30">
-                <div className="flex h-fit w-full max-w-lg flex-col gap-4">
-                    <div>
+            <div className="relative z-10 flex h-full w-full items-center justify-center bg-black bg-opacity-30">
+                <div className="flex h-fit w-full max-w-lg flex-col gap-4 p-4">
+                    <div className="text-white">
                         <h1 className="text-title-1">Unsplash_</h1>
                         <p>
                             The internet’s source for visuals. <br /> Powered by creators
                             everywhere.
                         </p>
                     </div>
-                    <Search />
+                    <div className="hidden h-fit w-full sm:block">
+                        <Search className="rounded-sm" />
+                    </div>
                 </div>
             </div>
         </section>
