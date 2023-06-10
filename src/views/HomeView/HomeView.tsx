@@ -6,12 +6,16 @@ import React from 'react'
 import useHome from './useHome'
 
 const HomeView = () => {
-    const { randomPhoto, photos } = useHome()
+    const { randomPhoto, photos, infiniteScrollRef } = useHome()
     return (
         <Layout>
             <main className="flex flex-col gap-4">
                 <HeroSection randomPhoto={randomPhoto} />
                 <ContentSection photos={photos} />
+                {/*
+                 * offset reference for infinite scroll
+                 */}
+                <div className="visible" ref={infiniteScrollRef}></div>
             </main>
         </Layout>
     )
