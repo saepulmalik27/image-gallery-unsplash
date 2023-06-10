@@ -27,3 +27,26 @@ type PhotoUser = {
         large: string
     }
 }
+
+export type PhotoSearchResult = {
+    results: Photo[]
+    total: number
+    total_pages: number
+}
+
+export declare module PhotoSearchQuery {
+    export type Args = {
+        query: string
+        page: number
+    }
+    export type Data = PhotoSearchResult
+    export type Result = PhotoSearchResult
+}
+
+export declare module GetPhotoList {
+    export type Args = {
+        page: number
+    }
+    export type Data = PhotoSearchResult
+    export type Result = PhotoSearchResult
+}

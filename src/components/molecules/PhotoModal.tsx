@@ -5,6 +5,7 @@ import React from 'react'
 import Avatar from '../atoms/Avatar'
 import FavoriteButton from '../atoms/FavoriteButton'
 import ShareButton, { PopoverPosition } from '../atoms/ShareButton'
+import SVG from 'react-inlinesvg'
 
 type ModalPhotoProps = {
     isOpen: boolean
@@ -15,14 +16,16 @@ type ModalPhotoProps = {
 const ModalPhoto: React.FC<ModalPhotoProps> = ({ isOpen, handleCloseModal, data }) => {
     return (
         <Dialog className={'relative z-50 '} open={isOpen} onClose={handleCloseModal}>
+            {/* backdrop */}
             <div className="fixed inset-0 cursor-zoom-out bg-black/30" aria-hidden="true" />
+            {/* scrollable modal */}
             <div className="fixed inset-0 overflow-y-auto">
                 <div className="flex min-h-full items-center justify-center p-4">
-                    <Dialog.Panel className="relative mx-auto max-w-screen-init rounded bg-white p-5 sm:p-10 md:p-20 lg:p-40">
+                    <Dialog.Panel className="relative mx-auto max-w-screen-init rounded bg-white px-5 py-12 sm:px-10 md:px-20 lg:px-40">
                         <div
                             className="absolute right-0 top-0 flex h-10 w-10 cursor-pointer select-none items-center justify-center rounded-sm border border-solid text-lg font-bold text-slate-700"
                             onClick={handleCloseModal}>
-                            X
+                            <SVG src="/assets/icons/close.svg" className="h-8 w-8" />
                         </div>
                         {data && (
                             <div className="flex flex-col gap-4">

@@ -1,6 +1,6 @@
 import React from 'react'
 import Logo from '@/components/atoms/Logo'
-import Search from '@/components/atoms/Search'
+import Search from '@/components/atoms/Search/Search'
 
 const Header = () => {
     return (

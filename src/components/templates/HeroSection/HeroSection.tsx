@@ -1,16 +1,19 @@
-import Search from '@/components/atoms/Search'
+import Search from '@/components/atoms/Search/Search'
+import { Photo } from '@/lib/types'
 import Image from 'next/image'
 import React from 'react'
 
-const HeroSection = () => {
+type HeroSectionProps = {
+    randomPhoto: Photo
+}
+
+const HeroSection: React.FC<HeroSectionProps> = ({ randomPhoto }) => {
     return (
         <section className="relative h-80 md:h-[600]">
             <div className="absolute left-0 top-0 z-0 h-full w-full bg-black bg-opacity-50">
                 <Image
                     fill={true}
-                    src={
-                        'https://images.unsplash.com/photo-1684999574712-e1b53b87b709?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTkwMDB8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODYyOTI3MDl8&ixlib=rb-4.0.3&q=80&w=1080'
-                    }
+                    src={randomPhoto?.urls?.regular}
                     alt="hero"
                     className="h-96 w-full object-cover"
                 />
