@@ -1,5 +1,5 @@
 import Layout from '@/components/Layout'
-import ContentSection from '@/components/templates/ConetentSection/ContentSection'
+import ContentSection from '@/components/templates/ContentSection/ContentSection'
 import HeroSection from '@/components/templates/HeroSection/HeroSection'
 import React from 'react'
 import photos from '@/mockup/images.json'
