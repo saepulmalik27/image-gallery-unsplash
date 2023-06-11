@@ -64,5 +64,6 @@ export const {
     setErrorPage,
     resetErrorPage,
     setMyFavoritePhotos,
+    removeMyFavoritePhotos,
 } = PhotosSlice.actions
 export default PhotosSlice.reducer
