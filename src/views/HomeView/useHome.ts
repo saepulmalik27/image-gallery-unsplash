@@ -25,7 +25,6 @@ const useHome = () => {
         isError,
     } = useSelector((state: RootState) => state.photos)
     const { query: searchQuery } = useSelector((state: RootState) => state.search)
-    console.log('queryseacj', searchQuery)
 
     /**
      * get random photo for hero section
@@ -43,13 +42,7 @@ const useHome = () => {
      */
     const [
         handleGetPhotoList,
-        {
-            data: photolist,
-            isError: isErrorPhotoList,
-            isLoading: isLoadingPhotoList,
-            isFetching: isFetchingPhotoList,
-            isSuccess: isSuccessPhotoList,
-        },
+        { isLoading: isLoadingPhotoList, isFetching: isFetchingPhotoList, error: errorPhotoList },
     ] = photosApi.useLazyGetPhotosQuery()
 
     /**
@@ -58,11 +51,9 @@ const useHome = () => {
     const [
         handleGetPhotoListByQuery,
         {
-            data: photosearch,
-            isError: isErrorPhotoSearch,
             isLoading: isLoadingPhotoSearch,
             isFetching: isFetchingPhotoSearch,
-            isSuccess: isSuccessPhotoSearch,
+            error: errorPhotoSearch,
         },
     ] = photosApi.useLazySearchPhotoQuery()
 
@@ -127,6 +118,11 @@ const useHome = () => {
         total_pages,
         infiniteScrollRef,
         isError,
+        isLoadingPhotoList:
+            isLoadingPhotoList ||
+            isFetchingPhotoList ||
+            isLoadingPhotoSearch ||
+            isFetchingPhotoSearch,
     }
 }
 

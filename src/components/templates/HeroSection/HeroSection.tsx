@@ -1,4 +1,5 @@
 import Search from '@/components/atoms/Search/Search'
+import { DATA_BLUR_64 } from '@/lib/constant'
 import { Photo } from '@/lib/types'
 import Image from 'next/image'
 import React from 'react'
@@ -16,6 +17,12 @@ const HeroSection: React.FC<HeroSectionProps> = ({ randomPhoto }) => {
                     src={randomPhoto?.urls?.regular}
                     alt="hero"
                     className="h-96 w-full object-cover"
+                    placeholder="blur"
+                    blurDataURL={DATA_BLUR_64}
+                    onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+                        e.currentTarget.onerror = null
+                        e.currentTarget.src = '/assets/images/default_hero.avif'
+                    }}
                 />
             </div>
             <div className="relative z-10 flex h-full w-full items-center justify-center bg-black bg-opacity-30">

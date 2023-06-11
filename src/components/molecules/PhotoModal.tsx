@@ -7,6 +7,7 @@ import FavoriteButton from '../atoms/FavoriteButton'
 import ShareButton, { PopoverPosition } from '../atoms/ShareButton'
 import SVG from 'react-inlinesvg'
 import { base83ToBase64 } from '@/utils/helper'
+import { DATA_BLUR_64 } from '@/lib/constant'
 
 type ModalPhotoProps = {
     isOpen: boolean
@@ -53,11 +54,14 @@ const ModalPhoto: React.FC<ModalPhotoProps> = ({ isOpen, handleCloseModal, data 
                                     width={data.width}
                                     height={data.height}
                                     alt={data.alt_description}
-                                    blurDataURL={base83ToBase64(data.blur_hash)}
+                                    blurDataURL={DATA_BLUR_64}
                                     placeholder="blur"
                                     className="cursor-zoom-out"
                                     onClick={handleCloseModal}
-                                    onLoad={() => console.log('loaded')}
+                                    onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+                                        e.currentTarget.onerror = null
+                                        e.currentTarget.src = '/assets/images/default_image.png'
+                                    }}
                                 />
                             </div>
                         )}

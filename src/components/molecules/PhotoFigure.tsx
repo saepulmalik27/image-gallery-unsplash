@@ -8,6 +8,7 @@ import ShareButton from '../atoms/ShareButton'
 import { useInView } from 'react-intersection-observer'
 import { motion } from 'framer-motion'
 import { base83ToBase64 } from '@/utils/helper'
+import { DATA_BLUR_64 } from '@/lib/constant'
 
 type PhotoFigureProps = {
     photo: Photo
@@ -46,9 +47,13 @@ const PhotoFigure: React.FC<PhotoFigureProps> = ({ photo, onClick }) => {
                 height={photo.height}
                 alt={photo.alt_description}
                 placeholder="blur"
-                blurDataURL={base83ToBase64(photo.blur_hash)}
+                blurDataURL={DATA_BLUR_64}
                 className="cursor-zoom-in group-hover:sm:relative group-hover:sm:z-0"
                 onClick={onClick}
+                onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+                    e.currentTarget.onerror = null
+                    e.currentTarget.src = '/assets/images/default_image.png'
+                }}
             />
 
             <div

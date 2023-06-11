@@ -7,7 +7,7 @@ import useHome from './useHome'
 import NoContent from '@/components/templates/NoContent/NoContent'
 
 const HomeView = () => {
-    const { randomPhoto, photos, infiniteScrollRef, isError } = useHome()
+    const { randomPhoto, photos, infiniteScrollRef, isError, isLoadingPhotoList } = useHome()
     return (
         <Layout>
             <main className="flex flex-col gap-4">
@@ -20,6 +20,12 @@ const HomeView = () => {
                         {/*
                          * offset reference for infinite scroll
                          */}
+                        {isLoadingPhotoList && (
+                            <div className="flex w-full items-center justify-center">
+                                <h1 className="text-title-1">Loading....</h1>
+                            </div>
+                        )}
+
                         <div className="visible" ref={infiniteScrollRef}></div>
                     </React.Fragment>
                 )}
