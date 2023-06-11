@@ -46,7 +46,15 @@ const ModalPhoto: React.FC<ModalPhotoProps> = ({ isOpen, handleCloseModal, data 
                                     </p>
                                     <div className="flex gap-2">
                                         <FavoriteButton />
-                                        <ShareButton popover={PopoverPosition.BOTTOM_LEFT} />
+                                        <ShareButton
+                                            url={data.urls.regular}
+                                            description={
+                                                'i git this awesome image from unsplash ' +
+                                                ' ' +
+                                                data.description
+                                            }
+                                            popover={PopoverPosition.BOTTOM_LEFT}
+                                        />
                                     </div>
                                 </Dialog.Title>
                                 <Image

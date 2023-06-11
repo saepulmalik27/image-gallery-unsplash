@@ -66,7 +66,12 @@ const PhotoFigure: React.FC<PhotoFigureProps> = ({ photo, onClick }) => {
                 <figcaption className="truncate text-sm font-semibold sm:block">
                     {photo.description}
                 </figcaption>
-                <ShareButton />
+                <ShareButton
+                    url={photo.urls.regular}
+                    description={
+                        'i git this awesome image from unsplash ' + ' ' + photo.description
+                    }
+                />
             </div>
         </motion.figure>
     )
