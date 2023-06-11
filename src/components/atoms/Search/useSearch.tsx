@@ -1,5 +1,5 @@
 import { PhotoSearchResult } from '@/lib/types'
-import { setPhotos } from '@/store/actions/photos.slice'
+import { resetErrorPage, setErrorPage, setPhotos } from '@/store/actions/photos.slice'
 import { resetQuery, setQuery } from '@/store/actions/searchBar.slice'
 import { photosApi } from '@/store/queryApi/photos.api'
 import { RootState } from '@/store/store'
@@ -10,7 +10,6 @@ const useSearch = () => {
     const dispatch = useDispatch()
     const { query } = useSelector((state: RootState) => state.search)
     const [searchQuery, setSearchQuery] = React.useState<string>(query || '')
-    const [searchPhoto] = photosApi.useLazySearchPhotoQuery()
 
     /**
      * set searchQuery state when global query search state change
@@ -36,11 +35,6 @@ const useSearch = () => {
     const handleSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
             dispatch(setQuery(e.currentTarget.value))
-            searchPhoto({ query: e.currentTarget.value, page: 1 })
-                .unwrap()
-                .then((res: PhotoSearchResult) => {
-                    dispatch(setPhotos(res))
-                })
         }
     }
 

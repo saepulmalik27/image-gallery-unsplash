@@ -6,6 +6,7 @@ type PhotosState = {
     total: number
     total_pages: number
     current_page: number
+    isError: boolean
 }
 
 const initialState: PhotosState = {
@@ -13,6 +14,7 @@ const initialState: PhotosState = {
     total: 0,
     total_pages: 0,
     current_page: 1,
+    isError: false,
 }
 
 const PhotosSlice = createSlice({
@@ -32,8 +34,19 @@ const PhotosSlice = createSlice({
             state.total = action.payload.total
             state.total_pages = action.payload.total_pages
         },
+        setErrorPage: (state: PhotosState) => {
+            state.results = []
+            state.total = 0
+            state.total_pages = 0
+            state.current_page = 1
+            state.isError = true
+        },
+        resetErrorPage: (state: PhotosState) => {
+            state.isError = false
+        },
     },
 })
 
-export const { setPhotos, setCurrentPage, concatPhotos } = PhotosSlice.actions
+export const { setPhotos, setCurrentPage, concatPhotos, setErrorPage, resetErrorPage } =
+    PhotosSlice.actions
 export default PhotosSlice.reducer

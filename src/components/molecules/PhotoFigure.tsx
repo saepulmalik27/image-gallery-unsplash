@@ -7,6 +7,7 @@ import FavoriteButton from '../atoms/FavoriteButton'
 import ShareButton from '../atoms/ShareButton'
 import { useInView } from 'react-intersection-observer'
 import { motion } from 'framer-motion'
+import { base83ToBase64 } from '@/utils/helper'
 
 type PhotoFigureProps = {
     photo: Photo
@@ -28,7 +29,6 @@ const PhotoFigure: React.FC<PhotoFigureProps> = ({ photo, onClick }) => {
     return (
         <motion.figure
             ref={ref}
-            key={photo.id}
             {...animationOptions}
             className="group flex flex-col gap-2 px-1 py-2 sm:relative">
             <div
@@ -45,8 +45,8 @@ const PhotoFigure: React.FC<PhotoFigureProps> = ({ photo, onClick }) => {
                 width={photo.width}
                 height={photo.height}
                 alt={photo.alt_description}
-                key={photo.id}
-                blurDataURL={photo.blur_hash}
+                placeholder="blur"
+                blurDataURL={base83ToBase64(photo.blur_hash)}
                 className="cursor-zoom-in group-hover:sm:relative group-hover:sm:z-0"
                 onClick={onClick}
             />

@@ -1,4 +1,10 @@
-import { concatPhotos, setCurrentPage, setPhotos } from '@/store/actions/photos.slice'
+import {
+    concatPhotos,
+    resetErrorPage,
+    setCurrentPage,
+    setErrorPage,
+    setPhotos,
+} from '@/store/actions/photos.slice'
 import { photosApi, useGetRandomPhotoQuery } from '@/store/queryApi/photos.api'
 import { RootState } from '@/store/store'
 import React from 'react'
@@ -16,8 +22,11 @@ const useHome = () => {
         total,
         total_pages,
         current_page,
+        isError,
     } = useSelector((state: RootState) => state.photos)
-    const { query } = useSelector((state: RootState) => state.search)
+    const { query: searchQuery } = useSelector((state: RootState) => state.search)
+    console.log('queryseacj', searchQuery)
+
     /**
      * get random photo for hero section
      */
@@ -32,21 +41,38 @@ const useHome = () => {
     /**
      * get list of photos for photo content section
      */
-    const [handleGetPhotoList] = photosApi.useLazyGetPhotosQuery()
+    const [
+        handleGetPhotoList,
+        {
+            data: photolist,
+            isError: isErrorPhotoList,
+            isLoading: isLoadingPhotoList,
+            isFetching: isFetchingPhotoList,
+            isSuccess: isSuccessPhotoList,
+        },
+    ] = photosApi.useLazyGetPhotosQuery()
 
     /**
      * get list of photos by query for photo content section
      */
-    const [handleGetPhotoListByQuery] = photosApi.useLazySearchPhotoQuery()
+    const [
+        handleGetPhotoListByQuery,
+        {
+            data: photosearch,
+            isError: isErrorPhotoSearch,
+            isLoading: isLoadingPhotoSearch,
+            isFetching: isFetchingPhotoSearch,
+            isSuccess: isSuccessPhotoSearch,
+        },
+    ] = photosApi.useLazySearchPhotoQuery()
 
     /**
      * infinite scroll
      */
-
     React.useEffect(() => {
         if (entry && entry.intersectionRatio > 0 && inView) {
-            if (query) {
-                handleGetPhotoListByQuery({ query, page: current_page + 1 })
+            if (searchQuery) {
+                handleGetPhotoListByQuery({ query: searchQuery, page: current_page + 1 })
                     .unwrap()
                     .then(res => {
                         dispatch(concatPhotos(res))
@@ -61,7 +87,22 @@ const useHome = () => {
                     })
             }
         }
-    }, [inView, entry, query])
+    }, [inView, entry, searchQuery])
+
+    //get search query and set photos
+    React.useEffect(() => {
+        if (searchQuery) {
+            handleGetPhotoListByQuery({ query: searchQuery, page: current_page })
+                .unwrap()
+                .then(res => {
+                    dispatch(setPhotos(res))
+                    dispatch(resetErrorPage())
+                })
+                .catch(err => {
+                    dispatch(setErrorPage())
+                })
+        }
+    }, [searchQuery])
 
     // set initial photos
     React.useEffect(() => {
@@ -69,6 +110,10 @@ const useHome = () => {
             .unwrap()
             .then(res => {
                 dispatch(setPhotos(res))
+                dispatch(resetErrorPage())
+            })
+            .catch(err => {
+                dispatch(setErrorPage())
             })
     }, [])
 
@@ -81,6 +126,7 @@ const useHome = () => {
         total,
         total_pages,
         infiniteScrollRef,
+        isError,
     }
 }
 
