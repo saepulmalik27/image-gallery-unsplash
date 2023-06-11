@@ -3,7 +3,7 @@ import Image from 'next/image'
 import React from 'react'
 import Avatar from '../atoms/Avatar'
 import { twMerge } from 'tailwind-merge'
-import FavoriteButton from '../atoms/FavoriteButton'
+import FavoriteButton from '../atoms/FavoriteButton/FavoriteButton'
 import ShareButton from '../atoms/ShareButton'
 import { useInView } from 'react-intersection-observer'
 import { motion } from 'framer-motion'
@@ -62,7 +62,7 @@ const PhotoFigure: React.FC<PhotoFigureProps> = ({ photo, onClick }) => {
                     figureGroupHover,
                     figureFooterGroupHover
                 )}>
-                <FavoriteButton />
+                <FavoriteButton photo={photo} />
                 <figcaption className="truncate text-sm font-semibold sm:block">
                     {photo.description}
                 </figcaption>

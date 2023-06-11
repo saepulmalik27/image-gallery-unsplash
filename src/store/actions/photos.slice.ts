@@ -7,6 +7,7 @@ type PhotosState = {
     total_pages: number
     current_page: number
     isError: boolean
+    favoritePhotos: Photo[]
 }
 
 const initialState: PhotosState = {
@@ -15,6 +16,7 @@ const initialState: PhotosState = {
     total_pages: 0,
     current_page: 1,
     isError: false,
+    favoritePhotos: [],
 }
 
 const PhotosSlice = createSlice({
@@ -44,9 +46,23 @@ const PhotosSlice = createSlice({
         resetErrorPage: (state: PhotosState) => {
             state.isError = false
         },
+        setMyFavoritePhotos: (state: PhotosState, action: PayloadAction<Photo>) => {
+            state.favoritePhotos = [...state.favoritePhotos, action.payload]
+        },
+        removeMyFavoritePhotos: (state: PhotosState, action: PayloadAction<Photo>) => {
+            state.favoritePhotos = state.favoritePhotos.filter(
+                photo => photo.id !== action.payload.id
+            )
+        },
     },
 })
 
-export const { setPhotos, setCurrentPage, concatPhotos, setErrorPage, resetErrorPage } =
-    PhotosSlice.actions
+export const {
+    setPhotos,
+    setCurrentPage,
+    concatPhotos,
+    setErrorPage,
+    resetErrorPage,
+    setMyFavoritePhotos,
+} = PhotosSlice.actions
 export default PhotosSlice.reducer

@@ -3,7 +3,7 @@ import { Dialog } from '@headlessui/react'
 import Image from 'next/image'
 import React from 'react'
 import Avatar from '../atoms/Avatar'
-import FavoriteButton from '../atoms/FavoriteButton'
+import FavoriteButton from '../atoms/FavoriteButton/FavoriteButton'
 import ShareButton, { PopoverPosition } from '../atoms/ShareButton'
 import SVG from 'react-inlinesvg'
 import { base83ToBase64 } from '@/utils/helper'
@@ -45,7 +45,7 @@ const ModalPhoto: React.FC<ModalPhotoProps> = ({ isOpen, handleCloseModal, data 
                                         {data.description}
                                     </p>
                                     <div className="flex gap-2">
-                                        <FavoriteButton />
+                                        <FavoriteButton photo={data} />
                                         <ShareButton
                                             url={data.urls.regular}
                                             description={
