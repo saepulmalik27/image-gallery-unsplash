@@ -1,7 +1,5 @@
 ## Demo Project
 
-open [DEMO PROJECT](https://pintar-ventura-test.vercel.app/)
-
 ## Project Description & Tools
 
 this project is web app for searching image using public api UNSPLASH, here some feature that include in this project
