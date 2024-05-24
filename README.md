@@ -27,7 +27,7 @@ this project using tools
 
 ## Getting Started
 
-1. clone project from this repo url [https://github.com/saepulmalik27/pintar-ventura-test]
+1. clone project
 2. go to porject folder
 
 ```bash
